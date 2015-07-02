@@ -9,7 +9,7 @@ import numpy as np
 import pandas
 import statsmodels.api as sm
 
-dataframe = pandas.read_csv('C:\Users\jpaukov\Documents\Udacity\Project1\TurnstileWeatherv2.csv')
+dataframe = pandas.read_csv('C:\Users\jpaukov\Documents\Udacity\Project1\Udacity_Project_1_2429\Turnstile_weather_v2.csv')
 
 def linear_regression(features, values):
     
@@ -32,9 +32,9 @@ def Rsquar(depMean, predictions):
     
     return r_squared
 
-features = dataframe[['rain', 'hour', 'meantempi', ]]
+features = dataframe[['rain', 'hour', 'meantempi', 'precipi' ]]
 dummy_units = pandas.get_dummies(dataframe['UNIT'], prefix='unit')
-dummy_units2 = pandas.get_dummies(dataframe['conds'])
+dummy_units2 = pandas.get_dummies(dataframe['conds'], prefix='conds')
 features = features.join(dummy_units)
 features = features.join(dummy_units2)
 
