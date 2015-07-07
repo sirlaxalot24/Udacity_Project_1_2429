@@ -16,18 +16,20 @@ def normalize_features(features):
     means = np.mean(features, axis=0)
     std_devs = np.std(features, axis=0)
     normalized_features = (features - means) / std_devs
+
     return means, std_devs, normalized_features
 
 def recover_params(means, std_devs, norm_intercept, norm_params):
 
     intercept = norm_intercept - np.sum(means * norm_params / std_devs)
     params = norm_params / std_devs
+
     return intercept, params
 
 def linear_regression(features, values):
 
     
-    model = SGDRegressor(n_iter=10000)
+    model = SGDRegressor(n_iter=1000)
     results = model.fit(features, values)
     intercept = results.intercept_
     params = results.coef_
@@ -52,9 +54,7 @@ dataframe = pandas.read_csv('C:\Users\jpaukov\Documents\Udacity\Project1\Udacity
 
 features = dataframe[['rain', 'hour', 'weekday']]
 dummy_units = pandas.get_dummies(dataframe['UNIT'], prefix='unit')
-dummy_units2 = pandas.get_dummies(dataframe['conds'], prefix='conds')
 features = features.join(dummy_units)
-features = features.join(dummy_units2)
     
 values = dataframe['ENTRIESn_hourly']
     
